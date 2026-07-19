@@ -19,15 +19,12 @@
             <h2 id="pageTitle">تسجيل الدخول</h2>
             <p class="welcome-text" id="welcomeText">مرحباً بكم في البوابة الوطنية للخدمات الرقمية</p>
 
-            <!-- أزرار التبديل الأصلية -->
             <div class="toggle-container" id="tabsArea">
                 <button class="toggle-btn active" onclick="switchTab('citizen')">مواطن</button>
                 <button class="toggle-btn" onclick="switchTab('institution')">مؤسسة</button>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 1. نموذج تسجيل الدخول الحالي (معدل الربط والـ ID) -->
-            <!-- ========================================== -->
+            <!-- 1. نموذج تسجيل الدخول -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="input-group">
                     <i class="fa-regular fa-user input-icon"></i>
@@ -48,9 +45,7 @@
                 <button type="button" class="btn btn-secondary" onclick="toggleForm('register')">إنشاء حساب جديد</button>
             </form>
 
-            <!-- ========================================== -->
-            <!-- 2. نموذج إنشاء حساب الجديد (مدمج ومخفي افتراضياً) -->
-            <!-- ========================================== -->
+            <!-- 2. نموذج إنشاء حساب جديد -->
             <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
                 <div class="input-group">
                     <i class="fa-regular fa-id-card input-icon"></i>
@@ -72,7 +67,6 @@
                 <button type="button" class="btn btn-secondary" onclick="toggleForm('login')">العودة لتسجيل الدخول</button>
             </form>
 
-            <!-- طرق الدخول البديلة تظهر فقط عند واجهة تسجيل الدخول -->
             <div class="alternative-login" id="altLoginArea">
                 <p>طرق تسجيل الدخول</p>
                 <div class="alt-icons">
@@ -88,6 +82,87 @@
         </div>
     </div>
 
-    <script src="login-app.js"></script>
+    <!-- الكود مدمج هنا مباشرة لضمان الاستجابة الفورية -->
+    <script>
+        function switchTab(type) {
+            const buttons = document.querySelectorAll('.toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (type === 'citizen') {
+                buttons[0].classList.add('active');
+                document.getElementById('username').placeholder = "اسم المستخدم / رقم الهاتف / البريد الإلكتروني...";
+            } else {
+                buttons[1].classList.add('active');
+                document.getElementById('username').placeholder = "الرقم التعريفي للمؤسسة / البريد الإلكتروني...";
+            }
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = passwordInput.nextElementSibling;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        }
+
+        function toggleForm(formType) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const tabsArea = document.getElementById('tabsArea');
+            const altLoginArea = document.getElementById('altLoginArea');
+            const pageTitle = document.getElementById('pageTitle');
+            const welcomeText = document.getElementById('welcomeText');
+
+            if (formType === 'register') {
+                loginForm.style.display = 'none';
+                tabsArea.style.display = 'none';
+                altLoginArea.style.display = 'none';
+                registerForm.style.display = 'block';
+                pageTitle.textContent = "إنشاء حساب جديد";
+                welcomeText.textContent = "يرجى ملء البيانات للانضمام إلى البوابة الرقمية";
+            } else {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                tabsArea.style.display = 'flex';
+                altLoginArea.style.display = 'block';
+                pageTitle.textContent = "تسجيل الدخول";
+                welcomeText.textContent = "مرحباً بكم في البوابة الوطنية للخدمات الرقمية";
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            if (user.trim() === "" || pass.trim() === "") {
+                alert("يرجى إدخال بيانات تسجيل الدخول!");
+                return;
+            }
+            
+            // سطر التوجيه الإجباري المباشر
+            window.location.replace("home.html");
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('regName').value;
+            const user = document.getElementById('regUser').value;
+            const pass = document.getElementById('regPassword').value;
+            
+            if (name.trim() === "" || user.trim() === "" || pass.trim() === "") {
+                alert("يرجى ملء جميع الحقول المطلوبة للتسجيل!");
+                return;
+            }
+            
+            alert("مرحباً بك، تم إنشاء حسابك بنجاح!");
+            window.location.replace("home.html");
+        }
+    </script>
 </body>
 </html>
