@@ -16,14 +16,18 @@
         <div class="top-banner"></div>
 
         <div class="login-card">
-            <h2>تسجيل الدخول</h2>
-            <p class="welcome-text">مرحباً بكم في البوابة الوطنية للخدمات الرقمية</p>
+            <h2 id="pageTitle">تسجيل الدخول</h2>
+            <p class="welcome-text" id="welcomeText">مرحباً بكم في البوابة الوطنية للخدمات الرقمية</p>
 
-            <div class="toggle-container">
+            <!-- أزرار التبديل الأصلية -->
+            <div class="toggle-container" id="tabsArea">
                 <button class="toggle-btn active" onclick="switchTab('citizen')">مواطن</button>
                 <button class="toggle-btn" onclick="switchTab('institution')">مؤسسة</button>
             </div>
 
+            <!-- ========================================== -->
+            <!-- 1. نموذج تسجيل الدخول الحالي (معدل الربط والـ ID) -->
+            <!-- ========================================== -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="input-group">
                     <i class="fa-regular fa-user input-icon"></i>
@@ -33,7 +37,7 @@
                 <div class="input-group">
                     <i class="fa-solid fa-lock input-icon"></i>
                     <input type="password" id="password" placeholder="كلمة المرور" required>
-                    <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePasswordVisibility()"></i>
+                    <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePasswordVisibility('password')"></i>
                 </div>
 
                 <div class="forgot-password-container">
@@ -41,10 +45,35 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
-                <button type="button" class="btn btn-secondary">إنشاء حساب</button>
+                <button type="button" class="btn btn-secondary" onclick="toggleForm('register')">إنشاء حساب جديد</button>
             </form>
 
-            <div class="alternative-login">
+            <!-- ========================================== -->
+            <!-- 2. نموذج إنشاء حساب الجديد (مدمج ومخفي افتراضياً) -->
+            <!-- ========================================== -->
+            <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+                <div class="input-group">
+                    <i class="fa-regular fa-id-card input-icon"></i>
+                    <input type="text" id="regName" placeholder="الاسم الكامل (اللقب والاسم)..." required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope input-icon"></i>
+                    <input type="text" id="regUser" placeholder="رقم الهاتف أو البريد الإلكتروني..." required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="regPassword" placeholder="كلمة المرور الجديدة..." required>
+                    <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePasswordVisibility('regPassword')"></i>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="background-color: #3498db;">تأكيد التسجيل</button>
+                <button type="button" class="btn btn-secondary" onclick="toggleForm('login')">العودة لتسجيل الدخول</button>
+            </form>
+
+            <!-- طرق الدخول البديلة تظهر فقط عند واجهة تسجيل الدخول -->
+            <div class="alternative-login" id="altLoginArea">
                 <p>طرق تسجيل الدخول</p>
                 <div class="alt-icons">
                     <div class="alt-icon-btn main-method">
