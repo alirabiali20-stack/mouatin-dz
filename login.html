@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - البوابة الوطنية للخدمات الرقمية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="top-banner"></div>
+
+        <div class="login-card">
+            <h2>تسجيل الدخول</h2>
+            <p class="welcome-text">مرحباً بكم في البوابة الوطنية للخدمات الرقمية</p>
+
+            <div class="toggle-container">
+                <button class="toggle-btn active" onclick="switchTab('citizen')">مواطن</button>
+                <button class="toggle-btn" onclick="switchTab('institution')">مؤسسة</button>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <i class="fa-regular fa-user input-icon"></i>
+                    <input type="text" id="username" placeholder="اسم المستخدم / رقم الهاتف / البريد الإلكتروني..." required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="password" placeholder="كلمة المرور" required>
+                    <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePasswordVisibility()"></i>
+                </div>
+
+                <div class="forgot-password-container">
+                    <a href="#" class="forgot-password-link">استعادة كلمة المرور</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                <button type="button" class="btn btn-secondary">إنشاء حساب</button>
+            </form>
+
+            <div class="alternative-login">
+                <p>طرق تسجيل الدخول</p>
+                <div class="alt-icons">
+                    <div class="alt-icon-btn main-method">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </div>
+                    <div class="alt-icon-btn">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="login-app.js"></script>
+</body>
+</html>
